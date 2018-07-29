@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const config = require('../config/dataConfig')
+const config = require('../config/dataConfig');
+const errorHandler = require('../utils/errorHandler');
 
 module.exports.login = async (req, res) => {
    const condidate = await User.findOne({
@@ -18,7 +19,7 @@ module.exports.login = async (req, res) => {
              }, config.jwt, {expiresIn: 60 * 60});
 
             res.status(200).json({
-                massage: `Baerer ${token}`
+                massage: `Bearer ${token}`
             })
 
         } else {
@@ -51,7 +52,7 @@ module.exports.register = async (req, res) => {
             await newUser.save();
             res.status(201).json(newUser)
         } catch (e) {
-            res.status(504).json({massage: "Gateway Timeout " + e})
+            errorHandler(res, e);
         }
     }
 };

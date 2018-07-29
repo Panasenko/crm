@@ -1,23 +1,40 @@
-module.exports.getByCategotyId = (req, res) => {
-    res.status(200).json({
-        login: getById
-    })
+const Position = require('../models/Position');
+const errorHeandler = require('../utils/errorHandler');
+
+
+module.exports.getByCategotyId = async (req, res) => {
+   try {
+       const position = await Position.find({
+           category: res.params.categoryId,
+           user: res.user.id
+       });
+
+       res.status(200).json(position)
+   } catch (e){
+       errorHeandler(res, e)
+   }
 };
 
 module.exports.remove = (req, res) => {
-    res.status(200).json({
-        login: remove
-    })
+    try {
+
+    } catch (e){
+        errorHeandler(res, e)
+    }
 };
 
 module.exports.create = (req, res) => {
-    res.status(200).json({
-        login: create
-    })
+    try {
+
+    } catch (e){
+        errorHeandler(res, e)
+    }
 };
 
 module.exports.update = (req, res) => {
-    res.status(200).json({
-        login: update
-    })
+    try {
+
+    } catch (e){
+        errorHeandler(res, e)
+    }
 };
