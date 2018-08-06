@@ -32,7 +32,6 @@ module.exports.remove = async (req, res) => {
 
 module.exports.create = async (req, res) => {
 
-    console.log(req.user.id)
     const category = new Category({
         name: req.body.name,
         user: req.user.id,
