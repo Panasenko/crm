@@ -11,7 +11,9 @@ const orderRoutes = require('./routes/order');
 const positionRoutes = require('./routes/position');
 const app = express();
 
+
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cors());
@@ -20,7 +22,7 @@ app.use(passport.initialize());
 require('./middleware/passport')(passport);
 
 
-
+app.use(passport.initialize());
 app.use('/api/auth', authRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/category', categoryRoutes);
